@@ -9,6 +9,9 @@ export class Visitor {
 
   @Prop()
   scrolled: boolean;
+
+  @Prop()
+  avatar_src: string;
 }
 
 export const VisitorSchema = SchemaFactory.createForClass(Visitor);

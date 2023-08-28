@@ -2,6 +2,8 @@
   <div class="container mx-auto p-4">
     <h1 class="text-4xl font-semibold mb-4">{{ visitor.visitor_id }}</h1>
     <h2 class="text-2xl font-semibold mb-4">- {{ visitor.scrolled }}</h2>
+    <h2 class="text-2xl font-semibold mb-4">- {{ visitor.avatar_src }}</h2>
+
     <div class="flex space-x-4">
       <router-link to="/">Go back</router-link>
       <router-link :to="`/edit/${visitor._id}`" class="text-blue-500 hover:text-blue-700">

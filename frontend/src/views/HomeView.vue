@@ -10,9 +10,13 @@
           class="bg-white rounded-lg shadow-md p-6"
         >
           <blockvisitor class="text-xl italic font-serif mb-4 leading-relaxed">
-            <q>{{ visitor.visitor_id }}</q>
+            <p>{{ visitor.visitor_id }}</p>
           </blockvisitor>
-          <footer class="text-right text-gray-700 font-medium">- {{ visitor.scrolled }}</footer>
+          <footer class="text-right text-gray-700 font-medium">
+            - {{ visitor.scrolled }}
+            <br />
+            - {{ visitor.avatar_src }}
+          </footer>
         </VisitorCard>
       </div>
     </div>

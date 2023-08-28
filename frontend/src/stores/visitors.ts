@@ -7,6 +7,7 @@ interface Visitor {
   _id: string
   visitor_id: string
   scrolled: boolean
+  avatar_src: string
 }
 
 interface VisitorsState {
@@ -30,18 +31,15 @@ export const useVisitorsStore = defineStore({
       this.currentVisitor = response.data
     },
     async addVisitor(visitor: Visitor) {
-      console.log('visitor');
-      console.log(visitor);
       if (!visitor.scrolled) {
-        visitor.scrolled = false;
+        visitor.scrolled = false
       }
-      console.log(visitor);
       await axios.post(`${API_URL}/`, visitor)
       await this.fetchVisitors()
     },
     async updateVisitor(visitor: Visitor) {
       await axios.put(`${API_URL}/${visitor._id}`, visitor)
-      
+
       await this.fetchVisitors()
     },
 
