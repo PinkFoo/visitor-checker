@@ -1,0 +1,16 @@
+.table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  margin: 2rem auto auto auto;
+  max-width: 645px;
+}
+
+.table_cell {
+  border: 1px solid hsla(160, 100%, 37%, 1);
+  padding: 0.5rem;
+}
+
+.table-title {
+  text-align: center;
+}

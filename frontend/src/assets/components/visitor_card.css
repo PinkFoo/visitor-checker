@@ -1,0 +1,17 @@
+.visitor-card {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid hsla(160, 100%, 37%, 1);
+  border-radius: 50%;
+  padding: 1rem 1rem 0rem 1rem;
+  width: fit-content;
+  margin: auto auto 1rem;
+  overflow: hidden;
+}
+
+.visitor-card img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}

@@ -11,44 +11,36 @@ interface Visitor {
 }
 
 interface VisitorsState {
-  visitors: Array<Visitor>
   currentVisitor: Visitor | null
+  visitorReport: Record<string, number>
 }
 
 export const useVisitorsStore = defineStore({
   id: 'visitors',
   state: (): VisitorsState => ({
-    visitors: [],
-    currentVisitor: null
+    currentVisitor: {} as Visitor,
+    visitorReport: {}
   }),
+
   actions: {
-    async fetchVisitors() {
-      const response = await axios.get(API_URL)
-      this.visitors = response.data
-    },
+
     async fetchVisitor(id: string) {
       const response = await axios.get(`${API_URL}/${id}`)
       this.currentVisitor = response.data
     },
-    async addVisitor(visitor: Visitor) {
-      if (!visitor.scrolled) {
-        visitor.scrolled = false
-      }
-      await axios.post(`${API_URL}/`, visitor)
-      await this.fetchVisitors()
+    
+    async fetchReport() {
+      const response = await axios.get(`${API_URL}/report`)
+      this.visitorReport = response.data
     },
+
+    async addNewVisitor() {
+      const response = await axios.post(`${API_URL}/`)
+      this.currentVisitor = response.data
+    },
+
     async updateVisitor(visitor: Visitor) {
       await axios.put(`${API_URL}/${visitor._id}`, visitor)
-
-      await this.fetchVisitors()
     },
-
-    async deleteVisitor(id: string) {
-      await axios.delete(`${API_URL}/${id}`)
-      this.visitors = this.visitors.filter((visitor) => visitor._id !== id)
-      if (this.currentVisitor?._id === id) {
-        this.currentVisitor = null
-      }
-    }
   }
 })

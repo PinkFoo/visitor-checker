@@ -1,17 +1,10 @@
 <template>
-  <div class="bg-white shadow rounded p-4">
-    <div class="text-lg font-semibold mb-2">{{ visitor.visitor_id }}</div>
-    <div class="text-sm text-gray-500">- {{ visitor.scrolled }}</div>
-    <div class="text-sm text-gray-500">- {{ visitor.avatar_src }}</div>
-    <div class="mt-4">
-      <router-link :to="`/visitor/${visitor._id}`" class="text-blue-500 hover:text-blue-700">
-        View Details
-      </router-link>
-    </div>
+  <div class="rounded p-4">
+    <img v-bind:src="visitor.avatar_src" id="visitor-avatar" />
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   props: {
     visitor: {

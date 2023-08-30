@@ -4,16 +4,24 @@ import { Model } from 'mongoose';
 import { CreateVisitorDto } from '../dto/create-visitor.dto';
 import { UpdateVisitorDto } from '../dto/update-visitor.dto';
 import { Visitor, VisitorDocument } from '../schema/visitor.schema';
+import { HttpService } from '@nestjs/axios';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class VisitorService {
   constructor(
     @InjectModel(Visitor.name)
     private readonly visitorModel: Model<VisitorDocument>,
+    private readonly httpService: HttpService,
   ) {}
 
   async create(createVisitorDto: CreateVisitorDto): Promise<VisitorDocument> {
     const visitor = new this.visitorModel(createVisitorDto);
+    const url = 'https://random-data-api.com/api/v2/users';
+    const response = await firstValueFrom(this.httpService.get(url));
+    visitor.visitor_id = response.data.uid;
+    visitor.avatar_src = response.data.avatar;
+    visitor.scrolled = false;
     return visitor.save();
   }
 
@@ -21,8 +29,16 @@ export class VisitorService {
     return this.visitorModel.find().exec();
   }
 
+  async visitorsCount(): Promise<number> {
+    return this.visitorModel.count().exec();
+  }
+
+  async scrolledCount(): Promise<number> {
+    return this.visitorModel.count({ scrolled: true }).exec();
+  }
+
   async findOne(id: string) {
-    return this.visitorModel.findById(id);
+    return this.visitorModel.findOne({ visitor_id: id }).exec();
   }
 
   async update(
@@ -30,9 +46,5 @@ export class VisitorService {
     updateVisitorDto: UpdateVisitorDto,
   ): Promise<VisitorDocument> {
     return this.visitorModel.findByIdAndUpdate(id, updateVisitorDto);
-  }
-
-  async remove(id: string) {
-    return this.visitorModel.findByIdAndRemove(id);
   }
 }

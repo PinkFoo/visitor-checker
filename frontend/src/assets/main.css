@@ -1,11 +1,25 @@
 @import './base.css';
+@import './components/lorem_paragraphs.css';
+@import './components/visitor_card.css';
+@import './views/visitor_report.css';
 
 #app {
   max-width: 1280px;
+  width: 100%;
+  min-height: 100vh;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem 2rem 2rem 2rem;
 
   font-weight: normal;
+}
+
+.min-h-screen {
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  margin-bottom: 3rem;
 }
 
 a,
@@ -21,15 +35,25 @@ a,
   }
 }
 
+a.router-link-active {
+  text-decoration: underline;
+}
+
+nav a {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.25rem;
+  margin-right: 1rem;
+}
+
 @media (min-width: 1024px) {
   body {
     display: flex;
-    place-items: center;
+    align-items: flex-start;
+    justify-content: center;
   }
 
   #app {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
   }
 }

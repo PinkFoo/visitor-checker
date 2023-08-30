@@ -1,31 +1,16 @@
 <template>
   <div class="bg-gray-100 min-h-screen">
     <div class="container mx-auto px-4 py-8">
-      <h1 class="text-4xl font-bold text-center text-blue-600 mb-8">Visitors</h1>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <VisitorCard
-          v-for="visitor in visitors"
-          :key="visitor._id"
-          :visitor="visitor"
-          class="bg-white rounded-lg shadow-md p-6"
-        >
-          <blockvisitor class="text-xl italic font-serif mb-4 leading-relaxed">
-            <p>{{ visitor.visitor_id }}</p>
-          </blockvisitor>
-          <footer class="text-right text-gray-700 font-medium">
-            - {{ visitor.scrolled }}
-            <br />
-            - {{ visitor.avatar_src }}
-          </footer>
-        </VisitorCard>
+      <LoremParagraphs v-for="i in 10" :key="i" class="lorem-paragraph mb-3"></LoremParagraphs>
+      <div class="grid">
+        <VisitorCard v-if="visitor" :visitor="visitor" class="visitor-card"></VisitorCard>
       </div>
+      <LoremParagraphs v-for="i in 10" :key="i" class="lorem-paragraph mb-3"></LoremParagraphs>
     </div>
   </div>
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
-
 blockvisitor {
   font-family: 'Merriweather', serif;
   position: relative;
@@ -43,23 +28,61 @@ blockvisitor::before {
 }
 </style>
 
-<script>
+<script  lang="ts">
 import { useVisitorsStore } from '../stores/visitors'
 import VisitorCard from '../components/VisitorCard.vue'
+import LoremParagraphs from '../components/LoremParagraphs.vue'
 
 export default {
   components: {
-    VisitorCard
+    VisitorCard,
+    LoremParagraphs,
   },
   async created() {
     const visitorsStore = useVisitorsStore()
-    await visitorsStore.fetchVisitors()
+    const visitorIdKey = 'visitor_id'
+    const scrolledKey = 'scrolled'
+
+    const visitorId = sessionStorage.getItem(visitorIdKey)
+    const scrolled = sessionStorage.getItem(scrolledKey)
+
+    if (visitorId) {
+      await visitorsStore.fetchVisitor(visitorId)
+    } else {
+      await visitorsStore.addNewVisitor()
+      const visitor = await visitorsStore.currentVisitor
+      if (visitor) {
+        sessionStorage.setItem(visitorIdKey, visitor.visitor_id)
+        sessionStorage.setItem(scrolledKey, String(visitor.scrolled)) // Convert boolean to string
+      }
+    }
+
+    if (!scrolled || scrolled === 'false') {
+      const observer = new IntersectionObserver(
+        function(entries) {
+          if (entries[0].isIntersecting === true) {
+            const visitor = visitorsStore.currentVisitor
+            if (visitor) {
+              visitor.scrolled = true
+              visitorsStore.updateVisitor(visitor)
+              sessionStorage.setItem(scrolledKey, String(visitor.scrolled))
+            }
+            observer.unobserve(entries[0].target)
+          }
+        },
+        { threshold: [0] }
+      )
+      const element = document.querySelector('#visitor-avatar')
+      if (element) {
+        observer.observe(element)
+      }
+    }
   },
   computed: {
-    visitors() {
+    visitor() {
       const visitorsStore = useVisitorsStore()
-      return visitorsStore.visitors
-    }
-  }
+          return  visitorsStore.currentVisitor;
+    },
+  },
 }
 </script>
