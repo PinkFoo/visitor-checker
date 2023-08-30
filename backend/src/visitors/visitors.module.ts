@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { VisitorService } from './visitors.service';
-import { VisitorController } from './visitors.controller';
+import { VisitorsController } from './visitors.controller';
 import { Visitor, VisitorSchema } from '../schema/visitor.schema';
 import { MongooseModule } from '@nestjs/mongoose';
 import { HttpModule } from '@nestjs/axios';
@@ -15,7 +15,7 @@ import { HttpModule } from '@nestjs/axios';
     ]),
     HttpModule,
   ],
-  controllers: [VisitorController],
+  controllers: [VisitorsController],
   providers: [VisitorService],
 })
 export class VisitorsModule {}

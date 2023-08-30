@@ -7,7 +7,7 @@ import { VisitorsModule } from './visitors/visitors.module';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://user:XAGgptTiWDgN66Rx@cluster0.gvdptna.mongodb.net/?retryWrites=true&w=majority',
+      'mongodb+srv://user:[DATABASE PASSWORD]@cluster0.gvdptna.mongodb.net/?retryWrites=true&w=majority',
     ),
     VisitorsModule,
   ],

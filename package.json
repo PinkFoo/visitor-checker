@@ -1,0 +1,26 @@
+{
+    "name": "visitor-checker",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+      "start": "concurrently \"npm run start:be\" \"npm run start:fe\"",
+      "start:be": "cd backend && npm start",
+      "start:fe": "cd frontend && npm start",
+      "setup": "npm ci && npm run setup:be && npm run setup:fe",
+      "setup:be": "cd backend && npm ci",
+      "setup:fe": "cd frontend && npm ci"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/PinkFoo/visitor-checker.git"
+    },
+    "author": "PinkFoo",
+    "license": "UNLICENSED",
+    "bugs": {
+      "url": "https://github.com/PinkFoo/visitor-checker/issues"
+    },
+    "homepage": "https://github.com/PinkFoo/visitor-checker#readme",
+    "devDependencies": {
+      "concurrently": "^8.2.1"
+    }
+  }

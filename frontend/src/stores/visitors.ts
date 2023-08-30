@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-const API_URL = 'http://localhost:3000/visitor'
+const API_URL = 'http://localhost:3000/visitors'
 
 interface Visitor {
   _id: string
-  visitor_id: string
+  visitorId: string
   scrolled: boolean
-  avatar_src: string
+  avatarSrc: string
 }
 
 interface VisitorsState {

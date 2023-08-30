@@ -4,14 +4,14 @@ export type VisitorDocument = Visitor & Document;
 
 @Schema()
 export class Visitor {
-  @Prop()
-  visitor_id: string;
+  @Prop({ alias: 'avatar_id' })
+  visitorId: string;
 
   @Prop()
   scrolled: boolean;
 
-  @Prop()
-  avatar_src: string;
+  @Prop({ alias: 'avatar_src' })
+  avatarSrc: string;
 }
 
 export const VisitorSchema = SchemaFactory.createForClass(Visitor);

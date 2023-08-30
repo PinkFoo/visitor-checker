@@ -40,7 +40,7 @@ export default {
   },
   async created() {
     const visitorsStore = useVisitorsStore()
-    const visitorIdKey = 'visitor_id'
+    const visitorIdKey = 'visitorId'
     const scrolledKey = 'scrolled'
 
     const visitorId = sessionStorage.getItem(visitorIdKey)
@@ -52,7 +52,7 @@ export default {
       await visitorsStore.addNewVisitor()
       const visitor = await visitorsStore.currentVisitor
       if (visitor) {
-        sessionStorage.setItem(visitorIdKey, visitor.visitor_id)
+        sessionStorage.setItem(visitorIdKey, visitor.visitorId)
         sessionStorage.setItem(scrolledKey, String(visitor.scrolled)) // Convert boolean to string
       }
     }

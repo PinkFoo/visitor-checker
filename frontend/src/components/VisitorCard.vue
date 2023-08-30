@@ -1,6 +1,6 @@
 <template>
   <div class="rounded p-4">
-    <img v-bind:src="visitor.avatar_src" id="visitor-avatar" />
+    <img v-bind:src="visitor.avatarSrc" id="visitor-avatar" />
   </div>
 </template>
 

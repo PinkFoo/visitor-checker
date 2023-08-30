@@ -3,8 +3,8 @@ import { VisitorService } from './visitors.service';
 import { CreateVisitorDto } from '../dto/create-visitor.dto';
 import { UpdateVisitorDto } from '../dto/update-visitor.dto';
 
-@Controller('visitor')
-export class VisitorController {
+@Controller('visitors')
+export class VisitorsController {
   constructor(private readonly visitorService: VisitorService) {}
 
   @Post()
@@ -19,8 +19,8 @@ export class VisitorController {
 
   @Get('report')
   async generateReport() {
-    const visitorsCount = await this.visitorService.visitorsCount();
-    const scrolledCount = await this.visitorService.scrolledCount();
+    const visitorsCount = await this.visitorService.getVisitorsCount();
+    const scrolledCount = await this.visitorService.getEngagedVisitorsCount();
     let percentageScrolled = 0;
 
     if (visitorsCount > 0 && scrolledCount > 0) {

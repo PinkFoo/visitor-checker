@@ -1,8 +1,8 @@
 <template>
     <h2 class="table-title">Visitor statistics</h2>
   <div class="table">
-    <div class="table_cell">Number of users who accesed the page</div>
-    <div class="table_cell">Number of users who scrolled to the avatar</div>
+    <div class="table_cell">Number of users who accessed the page</div>
+    <div class="table_cell">Percentage of users who scrolled to the avatar</div>
     <div class="table_cell">{{ report.visitorsCount }}</div>
     <div class="table_cell">{{ report.percentageScrolled }}%</div>
   </div>

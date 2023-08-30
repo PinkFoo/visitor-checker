@@ -19,8 +19,8 @@ export class VisitorService {
     const visitor = new this.visitorModel(createVisitorDto);
     const url = 'https://random-data-api.com/api/v2/users';
     const response = await firstValueFrom(this.httpService.get(url));
-    visitor.visitor_id = response.data.uid;
-    visitor.avatar_src = response.data.avatar;
+    visitor.visitorId = response.data.uid;
+    visitor.avatarSrc = response.data.avatar;
     visitor.scrolled = false;
     return visitor.save();
   }
@@ -29,16 +29,16 @@ export class VisitorService {
     return this.visitorModel.find().exec();
   }
 
-  async visitorsCount(): Promise<number> {
+  async getVisitorsCount(): Promise<number> {
     return this.visitorModel.count().exec();
   }
 
-  async scrolledCount(): Promise<number> {
+  async getEngagedVisitorsCount(): Promise<number> {
     return this.visitorModel.count({ scrolled: true }).exec();
   }
 
   async findOne(id: string) {
-    return this.visitorModel.findOne({ visitor_id: id }).exec();
+    return this.visitorModel.findOne({ visitorId: id }).exec();
   }
 
   async update(

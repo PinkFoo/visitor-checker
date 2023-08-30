@@ -1,11 +1,11 @@
 export class Visitor {
-  visitor_id: string;
+  visitorId: string;
   scrolled: boolean;
-  avatar_src: string;
+  avatarSrc: string;
 
-  public constructor(visitor_id: string) {
-    this.visitor_id = visitor_id;
+  public constructor(visitorId: string) {
+    this.visitorId = visitorId;
     this.scrolled = false;
-    this.avatar_src = '';
+    this.avatarSrc = '';
   }
 }
