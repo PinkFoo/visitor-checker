@@ -1,3 +1,4 @@
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -6,9 +7,14 @@ import { VisitorsModule } from './visitors/visitors.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://user:[DATABASE PASSWORD]@cluster0.gvdptna.mongodb.net/?retryWrites=true&w=majority',
-    ),
+    ConfigModule.forRoot(),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGO_CONNECTION_STRING'),
+      }),
+      inject: [ConfigService],
+    }),
     VisitorsModule,
   ],
   controllers: [AppController],
