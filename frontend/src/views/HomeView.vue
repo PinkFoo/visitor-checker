@@ -28,7 +28,7 @@ blockvisitor::before {
 }
 </style>
 
-<script  lang="ts">
+<script lang="ts">
 import { useVisitorsStore } from '../stores/visitors'
 import VisitorCard from '../components/VisitorCard.vue'
 import LoremParagraphs from '../components/LoremParagraphs.vue'
@@ -36,7 +36,7 @@ import LoremParagraphs from '../components/LoremParagraphs.vue'
 export default {
   components: {
     VisitorCard,
-    LoremParagraphs,
+    LoremParagraphs
   },
   async created() {
     const visitorsStore = useVisitorsStore()
@@ -59,7 +59,7 @@ export default {
 
     if (!scrolled || scrolled === 'false') {
       const observer = new IntersectionObserver(
-        function(entries) {
+        function (entries) {
           if (entries[0].isIntersecting === true) {
             const visitor = visitorsStore.currentVisitor
             if (visitor) {
@@ -81,8 +81,8 @@ export default {
   computed: {
     visitor() {
       const visitorsStore = useVisitorsStore()
-          return  visitorsStore.currentVisitor;
-    },
-  },
+      return visitorsStore.currentVisitor
+    }
+  }
 }
 </script>

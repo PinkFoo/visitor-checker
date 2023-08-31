@@ -23,12 +23,11 @@ export const useVisitorsStore = defineStore({
   }),
 
   actions: {
-
     async fetchVisitor(id: string) {
       const response = await axios.get(`${API_URL}/${id}`)
       this.currentVisitor = response.data
     },
-    
+
     async fetchReport() {
       const response = await axios.get(`${API_URL}/report`)
       this.visitorReport = response.data
@@ -41,6 +40,6 @@ export const useVisitorsStore = defineStore({
 
     async updateVisitor(visitor: Visitor) {
       await axios.put(`${API_URL}/${visitor._id}`, visitor)
-    },
+    }
   }
 })
